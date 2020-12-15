@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Work Day Scheduler</title>
+</head>
+
+<body>
+    <audio controls id="right">
+      <source src="./done-for-you-612.mp3" type="audio/mpeg">
+  
+    </audio>
+  <header class="jumbotron">
+    <h1 class="display-3">Work Day Scheduler</h1>
+    <p class="lead">A simple calendar app for scheduling your work day</p>
+    <p id="currentDay" class="lead">
+    </p>
+  </header>
+  <div class="container">
+    <!-- Timeblocks go here -->
+    <div id='9' class="row time-block">
+      <div class="col-sm-1 hour">9AM</div>
+      <textarea id=area9AM class="col-sm-10 description" name="9"></textarea>
+      <button class="col-sm-1 saveBtn btn"><i class="far fa-save fa-lg"></i></button>
+    </div>
+    <div id="10" class="row time-block">
+      <div class="col-sm-1 hour">10AM</div>
+      <textarea id=area10AM class="col-sm-10 description" name="10"></textarea>
+      <button class="col-sm-1 saveBtn btn"><i class="far fa-save fa-lg"></i></button>
+    </div>
+    <div id="11" class="row time-block">
+      <div class="col-sm-1 hour">11AM</div>
+      <textarea id=area11AM class="col-sm-10 description" name="11"></textarea>
+      <button class="col-sm-1 saveBtn btn"><i class="far fa-save fa-lg"></i></button>
+    </div>
+    <div id='12' class="row time-block">
+      <div class="col-sm-1 hour">12PM</div>
+      <textarea id=area12PM class="col-sm-10 description" name="12"></textarea>
+      <button class="col-sm-1 saveBtn btn"><i class="far fa-save fa-lg"></i></button>
+    </div>
+    <div id="1" class="row time-block">
+      <div class="col-sm-1 hour">1PM</div>
+      <textarea id=area1PM class="col-sm-10 description" name="13"></textarea>
+      <button class="col-sm-1 saveBtn btn"><i class="far fa-save fa-lg"></i></button>
+    </div>
+    <div id="2" class="row time-block">
+      <div class="col-sm-1 hour">2PM</div>
+      <textarea id=area2PM class="col-sm-10 description" name="14"></textarea>
+      <button class="col-sm-1 saveBtn btn"><i class="far fa-save fa-lg"></i></button>
+    </div>
+    <div id="3" class="row time-block">
+      <div class="col-sm-1 hour">3PM</div>
+      <textarea id=area3PM class="col-sm-10 description" name="15"></textarea>
+      <button class="col-sm-1 saveBtn btn"><i class="far fa-save fa-lg"></i></button>
+    </div>
+    <div id='4' class="row time-block">
+      <div class="col-sm-1 hour">4PM</div>
+      <textarea id=area4PM class="col-sm-10 description" name="16"></textarea>
+      <button class="col-sm-1 saveBtn btn" id="me"><i class="far fa-save fa-lg"></i></button>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script type="text/javascript">
+
+    $("#currentDay").text(new Date());
+
+
+
+    var A9AM = $("#area9AM");
+    var A10AM = $("#area10AM");
+    var A11AM = $("#area11AM");
+    var P12AM = $("#area12PM");
+    var P1PM = $("#area1PM");
+    var P2PM = $("#area2PM");
+    var P3PM = $("#area3PM");
+    var P4PM = $("#area4PM");
+
+
+
+    //save to local storage 
+    $("button").on("click", function () {
+        var good = document.getElementById("right");
+
+      good.play();
+      localStorage.setItem("9AM", (A9AM.val()))
+      localStorage.setItem("10AM", (A10AM.val()))
+      localStorage.setItem("11AM", (A11AM.val()))
+      localStorage.setItem("12PM", (P12AM.val()))
+      localStorage.setItem("1PM", (P1PM.val()))
+      localStorage.setItem("2PM", (P2PM.val()))
+      localStorage.setItem("3PM", (P3PM.val()))
+      localStorage.setItem("4PM", (P4PM.val()))
+
+     
+
+    })
+   $("#area9AM").append(localStorage.getItem("9AM"));
+      $("#area10AM").append(localStorage.getItem("10AM"));
+      $("#area11AM").append(localStorage.getItem("11AM"));
+      $("#area12PM").append(localStorage.getItem("12PM"));
+      $("#area1PM").append(localStorage.getItem("1PM"));
+      $("#area2PM").append(localStorage.getItem("2PM"));
+      $("#area3PM").append(localStorage.getItem("3PM"));
+      $("#area4PM").append(localStorage.getItem("4PM"));
+
+
+        
+    var now = parseInt(moment().format('HH'));
+    console.log(now)
+
+
+    $("textarea").each(function () {
+      var name = parseInt($(this).attr("name"));
+      if (name < now) {
+        $(this).addClass("past");
+      }
+
+
+      if (name > now) {
+        $(this).addClass("future")
+      }
+
+      if (name === now) {
+        $(this).addClass("present")
+      }
+
+
+
+    })
+
+  </script>
+
+<style>
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:black;
+    color: white;
+    font-size: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+    text-align: center;
+  padding:25PX ;
+  }
+</style>
+
+<div class="footer">
+  <p>@ZAID ALHARAHSHEH</p>
+</div>
+</body>
+
+</html>
