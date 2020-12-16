@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -14,6 +16,7 @@
 </head>
 
 <body>
+<!-- me and luna and menuka worked on this together -->
     <audio controls id="right">
       <source src="./done-for-you-612.mp3" type="audio/mpeg">
   
@@ -105,6 +108,7 @@
      
 
     })
+    // get from local storage
    $("#area9AM").append(localStorage.getItem("9AM"));
       $("#area10AM").append(localStorage.getItem("10AM"));
       $("#area11AM").append(localStorage.getItem("11AM"));
@@ -118,7 +122,7 @@
         
     var now = parseInt(moment().format('HH'));
     console.log(now)
-
+// if statment to change the background color depending on the current time
 
     $("textarea").each(function () {
       var name = parseInt($(this).attr("name"));
